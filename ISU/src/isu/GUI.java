@@ -59,9 +59,9 @@ public class GUI extends javax.swing.JFrame {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel23 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
+        lifeText = new javax.swing.JLabel();
+        woodText = new javax.swing.JLabel();
+        rubbleText = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         leaveButton = new javax.swing.JButton();
         tutorialPanel = new javax.swing.JPanel();
@@ -237,7 +237,7 @@ public class GUI extends javax.swing.JFrame {
 
         mainPanel.add(controlsPanel, "card4");
 
-        mapArea.setBackground(new java.awt.Color(163, 137, 21));
+        mapArea.setBackground(new java.awt.Color(131, 94, 59));
 
         jLabel17.setText("Buffer");
 
@@ -252,11 +252,11 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel20.setText("Rubble");
 
-        jLabel21.setText("0");
+        lifeText.setText("0");
 
-        jLabel23.setText("0");
+        woodText.setText("0");
 
-        jLabel22.setText("0");
+        rubbleText.setText("0");
 
         jLabel25.setText("Health");
 
@@ -287,9 +287,9 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jLabel18))
                 .addGap(18, 18, 18)
                 .addGroup(mapAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
-                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(woodText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                    .addComponent(lifeText, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rubbleText, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(208, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mapAreaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -307,18 +307,18 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(HealthBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(mapAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel20)
-                        .addComponent(jLabel22)))
+                        .addComponent(rubbleText)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mapAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel17)
                     .addComponent(BufferBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(mapAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(woodText, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel19)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(mapAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18)
-                    .addComponent(jLabel21))
+                    .addComponent(lifeText))
                 .addContainerGap(795, Short.MAX_VALUE))
         );
 
@@ -446,9 +446,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -459,10 +456,13 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JButton leaveButton;
+    public javax.swing.JLabel lifeText;
     private javax.swing.JPanel mainPanel;
     private isu.mapArea mapArea;
     private javax.swing.JButton playBtn;
+    public javax.swing.JLabel rubbleText;
     private javax.swing.JButton tutorialBtn;
     private javax.swing.JPanel tutorialPanel;
+    public javax.swing.JLabel woodText;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package isu;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 
 /**
@@ -72,8 +73,8 @@ public class Minion {
         }  
     }
     
-    public void collect(){
-        
+    public void collectTarget(Resource resource){
+        resource.damage(damage);         //deteriorates the health of a target
     }
 
 

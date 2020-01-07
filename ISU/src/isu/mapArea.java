@@ -11,14 +11,12 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.MouseInfo;
 import java.awt.Point;
-import java.awt.PointerInfo;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import javax.swing.Timer;
 
@@ -42,7 +40,12 @@ public class mapArea extends javax.swing.JPanel {
     Rectangle playerBound = new Rectangle(playerx, playery, 25, 25);
     int targetX;
     int targetY;
-    boolean keepTarget;
+    Resource resourceTarget;
+    int rubbleVal = 0;
+    int woodVal = 0;
+    int lifeVal = 0;
+    int minionCost = 0;  // cost in life to spawn a minion depending on its type
+    // boolean keepTarget;
 
     public mapArea() {
 
@@ -55,14 +58,14 @@ public class mapArea extends javax.swing.JPanel {
         // mapArea map = new mapArea();
         // System.out.println(map.isFocusable());
         for (int i = 0; i < 5; i++) {    // initializes 5 minions
-            minionList[i] = new Minion(1, 100, 5, playerx + i * 30, playery); // initializes a standard minion at the player's position
+            minionList[i] = new Minion(1, 100, 1, playerx + i * 30, playery); // initializes a standard minion at the player's position
         }
         for (int i = 0; i < resourceNum; i++) {    // initializes 5 minions
             int resourceSize = (int) (Math.random() * 201) + 300; // generates a size value between 200 and 500
-            int resourceType = (int) (Math.random() * 3);
+            int resourceType = (int) (Math.random() * 3);       // generates a random resource type between 0 and 2(rubble,wood,life)
             int resourceX = (int) (Math.random() * 900);  // generates x coordinate between 0 and 900
             int resourceY = (int) (Math.random() * 500) + 200; // generates y coordinate between 200 and 800
-            resourceList[i] = new Resource(resourceSize, resourceType, resourceX, resourceY); // initializes a standard minion at the player's position
+            resourceList[i] = new Resource(resourceSize, resourceSize, resourceType, resourceX, resourceY); // initializes a standard minion at the player's position
         }
         for (int i = 5; i < minionList.length; i++) {    // initializes placeholders for minions
             // minionList[i] = new Minion(1, 0, 0, 0, 0); // initializes placholders off screen
@@ -98,6 +101,10 @@ public class mapArea extends javax.swing.JPanel {
         g.drawImage(player, playerx, playery, this);
         g.setColor(Color.BLUE);
         g.drawRect(playerx, playery, 25, 25);
+        if (resourceTarget != null) {
+            g.setColor(Color.RED);
+            g.drawRect(resourceTarget.getX() - 1, resourceTarget.getY() - 1, resourceTarget.sideLength() + 1, resourceTarget.sideLength() + 1); // draws box around a selected resource
+        }
         // g.setColor(Color.MAGENTA);
         //   g.drawRect(playerx, playery, 20, 20);
         this.enableEvents(AWTEvent.MOUSE_EVENT_MASK
@@ -108,9 +115,9 @@ public class mapArea extends javax.swing.JPanel {
     }
 
     public void spawn() {
-        if(minionNum < 100){
-        minionList[minionNum] = new Minion(1, 100, 5, playerx, playery);  // creates a new minion object on top of the player
-        minionNum++;   // updates the number of minions in existence
+        if (minionNum < 100 && lifeVal >= minionCost) {
+            minionList[minionNum] = new Minion(1, 100, 5, playerx, playery);  // creates a new minion object on top of the player
+            minionNum++;   // updates the number of minions in existence
         }
     }
 
@@ -177,7 +184,41 @@ public class mapArea extends javax.swing.JPanel {
             for (int i = 0; i < minionNum; i++) {
                 //  if (keepTarget){  // checks if the minions are intended to follow
                 minionList[i].target(targetX, targetY);  // targets where the mouse clicks
-                //  }
+                if (resourceTarget != null) {
+                    if (Math.abs(minionList[i].getX() - resourceTarget.getX()) < 5) { // checks that the minions are close enough to a resource to collect it
+                        minionList[i].collectTarget(resourceTarget);
+                       
+                        if (resourceTarget.getSize() <= 0) {
+                            System.out.println("rubble:   " + rubbleVal);
+                            switch (resourceTarget.getType()) {
+                                case 0:
+                                    rubbleVal += resourceTarget.reward();  // gives rubble depending on the resource size
+                                    System.out.println("rubble:   " + rubbleVal);
+                                    
+                                    
+                                    
+                                    
+                                    ///////////////////////////////////////////////
+                                     GUI.rubbleText.setText("test");  // find a way to access this label in the jframe
+                                     
+                                     /////////////////////////////////////////////////////
+                                     
+                                     
+                                     
+                                     
+                                    break;
+                                case 1:
+                                    woodVal += resourceTarget.reward();//gives wood depending on the resource size
+                                    break;
+                                case 2:
+                                    lifeVal += resourceTarget.reward();//gives life depending on the resource size
+                                    break;
+
+                            }
+                            resourceTarget = null;
+                        }
+                    }
+                }
                 if (minionList[i].getBounds().intersects(playerBound)) {
                     if (minionList[i].getX() >= playerx) {
                         minionList[i].setX(2);
@@ -190,7 +231,7 @@ public class mapArea extends javax.swing.JPanel {
                         minionList[i].setY(-2);
                     }
                 }
-                for (int j = 0; j < minionNum; j++) {  // checks collisions with other minions
+                for (int j = 0; j < minionNum; j++) {  //nested loop that checks collisions with other minions
                     if (j != i) {  // stops every minion from colliding with itself
                         if (minionList[i].getBounds().intersects(minionList[j].getBounds())) {
                             if (minionList[i].getX() > minionList[j].getX()) {
@@ -204,13 +245,9 @@ public class mapArea extends javax.swing.JPanel {
                                 minionList[j].setY(1);
                             }
                         }
-            
+
                     }
                 }
-                 for (int j = 0; j < resourceList.length; j++) {
-                         //   if((minionList[i].getX-resource)){
-                            
-                       // }
             }
             if (keys[0]) {
                 playerx -= 1;
@@ -234,14 +271,29 @@ public class mapArea extends javax.swing.JPanel {
             case MouseEvent.MOUSE_PRESSED:
                 type = "MOUSE_PRESSED";
                 System.out.println(e.getX() + " " + e.getY());// (x,y) IN THE PANEL
-                keepTarget = true; // minions follow when targeting is true
+                //  keepTarget = true; // minions follow when targeting is true
                 targetX = e.getX(); // sets target coordinates for minions to follow
                 targetY = e.getY();
+                Point targetPoint = new Point(targetX, targetY);
+                for (int r = 0; r < resourceList.length; r++) {
+                    /*
+                     if (targetX < resourceList[r].getX() 
+                     && (resourceList[r].getX() + resourceList[r].sideLength()>targetX)
+                     && targetY < resourceList[r].getY() 
+                     && (resourceList[r].getY() + resourceList[r].sideLength()>targetY)){
+                     //body of if condition
+                     }
+                     */
+                    if (resourceList[r].resourceTarget().contains(targetPoint)) {
+                        System.out.println("selected");
+                        resourceTarget = resourceList[r];
+                    }
+                }
 
                 break;
             case MouseEvent.MOUSE_RELEASED:
                 type = "MOUSE_RELEASED";
-                keepTarget = false; // stops the minions from targeting when mouse is released
+                //   keepTarget = false; // stops the minions from targeting when mouse is released
                 break;
             /*
              case MouseEvent.MOUSE_CLICKED:

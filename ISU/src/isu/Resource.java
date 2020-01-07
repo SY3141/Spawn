@@ -5,60 +5,62 @@
  */
 package isu;
 
+import java.awt.Rectangle;
+
 /**
  *
  * @author Yao
  */
 public class Resource {
 
-    int health;
+   // int health;
     int size;
     int type;
     int x;
     int y;
+    int reward;
+    boolean selected;
 
-    public Resource(int size, int type,int x,int y) {
-        
+    public Resource(int reward,int size, int type, int x, int y) {
+        this.reward = reward;
         this.size = size;
-        health = size;
+       // health = size;
         this.type = type;
         this.x = x;
         this.y = y;
     }
-    
-public int getX(){
-    return x;
-}
-public int getY(){
-    return y;
-}
-public int getType(){
-    return type;
-}
-    public int sideLength(){
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public int getType() {
+        return type;
+    }
+    public int getSize(){
+        return this.size;
+    }
+
+    public int sideLength() {
         return (int) Math.round(Math.sqrt(size));
     }
+
     public void damage(int damage) {
-        health -= damage;
-        if (health <= 0) {
-            reward();
-        }
+        if (size >= 0) {
+        size -= damage;
+        }      
+    }
+
+    public Rectangle resourceTarget() {
+        return new Rectangle(x, y, sideLength(), sideLength());
     }
 
     public int reward() {
-        return this.size;
-        /*
-        switch (type) {
-            case 0:
-                //gives rubble
-                break;
-            case 1:
-                //gives wood
-                break;
-            case 2:
-                break;
-                //gives life
-        }
-    */
+        return this.reward;
+
     }
 }
