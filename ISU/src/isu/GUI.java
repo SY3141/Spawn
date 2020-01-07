@@ -38,6 +38,7 @@ public class GUI extends javax.swing.JFrame {
         controlsBtn = new javax.swing.JButton();
         tutorialBtn = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        Exit_btn = new javax.swing.JButton();
         controlsPanel = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -62,9 +63,11 @@ public class GUI extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
+        leaveButton = new javax.swing.JButton();
         tutorialPanel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
 
         mainPanel.setPreferredSize(new java.awt.Dimension(1200, 900));
         mainPanel.setLayout(new java.awt.CardLayout());
@@ -107,6 +110,15 @@ public class GUI extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Papyrus", 0, 24)); // NOI18N
         jButton1.setText("Credits");
 
+        Exit_btn.setBackground(new java.awt.Color(70, 130, 180));
+        Exit_btn.setFont(new java.awt.Font("Papyrus", 0, 24)); // NOI18N
+        Exit_btn.setText("Exit");
+        Exit_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Exit_btnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout homePanelLayout = new javax.swing.GroupLayout(homePanel);
         homePanel.setLayout(homePanelLayout);
         homePanelLayout.setHorizontalGroup(
@@ -117,7 +129,8 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(playBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(controlsBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tutorialBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Exit_btn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanelLayout.createSequentialGroup()
                 .addContainerGap(510, Short.MAX_VALUE)
@@ -137,7 +150,9 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(tutorialBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Exit_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         mainPanel.add(homePanel, "card2");
@@ -245,6 +260,13 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel25.setText("Health");
 
+        leaveButton.setText("Leave");
+        leaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leaveButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout mapAreaLayout = new javax.swing.GroupLayout(mapArea);
         mapArea.setLayout(mapAreaLayout);
         mapAreaLayout.setHorizontalGroup(
@@ -269,11 +291,17 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(208, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, mapAreaLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(leaveButton)
+                .addGap(38, 38, 38))
         );
         mapAreaLayout.setVerticalGroup(
             mapAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mapAreaLayout.createSequentialGroup()
-                .addGap(55, 55, 55)
+                .addGap(21, 21, 21)
+                .addComponent(leaveButton)
+                .addGap(11, 11, 11)
                 .addGroup(mapAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel25)
                     .addComponent(HealthBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,7 +349,7 @@ public class GUI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(mainPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 914, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -346,6 +374,15 @@ public class GUI extends javax.swing.JFrame {
         tutorialPanel.setVisible(true);
         screen = 3;
     }//GEN-LAST:event_tutorialBtnActionPerformed
+
+    private void leaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leaveButtonActionPerformed
+       screenHide();
+       homePanel.setVisible(true);
+    }//GEN-LAST:event_leaveButtonActionPerformed
+
+    private void Exit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Exit_btnActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_Exit_btnActionPerformed
     public void screenHide() {
         homePanel.setVisible(false);
         mapArea.setVisible(false);
@@ -394,6 +431,7 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JProgressBar BufferBar;
+    private javax.swing.JButton Exit_btn;
     private javax.swing.JProgressBar HealthBar;
     private javax.swing.JButton controlsBtn;
     private javax.swing.JPanel controlsPanel;
@@ -420,6 +458,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JButton leaveButton;
     private javax.swing.JPanel mainPanel;
     private isu.mapArea mapArea;
     private javax.swing.JButton playBtn;

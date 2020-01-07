@@ -108,8 +108,10 @@ public class mapArea extends javax.swing.JPanel {
     }
 
     public void spawn() {
+        if(minionNum < 100){
         minionList[minionNum] = new Minion(1, 100, 5, playerx, playery);  // creates a new minion object on top of the player
-        minionNum++;   // updates the number of minions in existance
+        minionNum++;   // updates the number of minions in existence
+        }
     }
 
     public class AL extends KeyAdapter {
@@ -202,8 +204,13 @@ public class mapArea extends javax.swing.JPanel {
                                 minionList[j].setY(1);
                             }
                         }
+            
                     }
                 }
+                 for (int j = 0; j < resourceList.length; j++) {
+                         //   if((minionList[i].getX-resource)){
+                            
+                       // }
             }
             if (keys[0]) {
                 playerx -= 1;

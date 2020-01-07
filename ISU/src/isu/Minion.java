@@ -71,6 +71,10 @@ public class Minion {
         bounds = new Rectangle((int)minionX, (int)minionY, 10, 10);
         }  
     }
+    
+    public void collect(){
+        
+    }
 
 
     public Rectangle getBounds() {
