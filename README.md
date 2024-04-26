@@ -1,2 +1,2 @@
 # Spawn
-jan 6 version of isu
+Java summative project for Mr.Payne's Computer Science Class
